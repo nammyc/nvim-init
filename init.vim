@@ -20,7 +20,7 @@ endif
 call dein#begin('~/.config/nvim/bundle')
 
 call dein#add('~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim')
-call dein#add('Shougo/deoplete.nvim', {'build': 'vim -s +"silent call dein#remote_plugins()"'})
+call dein#add('Shougo/deoplete.nvim', {'build': 'vim -s +"call dein#remote_plugins()"'})
 call dein#add('scrooloose/nerdtree')
 call dein#add('Xuyuanp/nerdtree-git-plugin')
 call dein#add('sheerun/vim-polyglot')
