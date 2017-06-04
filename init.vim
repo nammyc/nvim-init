@@ -29,7 +29,7 @@ NeoBundle 'Valloric/YouCompleteMe', {
         \ }
      \ }
 NeoBundle 'bling/vim-airline'
-NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'morhetz/gruvbox'
 
 call neobundle#end()  
 filetype plugin indent on
@@ -41,9 +41,10 @@ NeoBundleCheck
 
 inoremap jj <Esc>`^
 set backspace=indent,eol,start " backspace over everything in insert mode
-syntax off
 noremap j h
 noremap k j
 noremap l k
 noremap ; l
+colorscheme gruvbox
+set background=dark
 
