@@ -1,43 +1,52 @@
-" NeoBundle Scripts-----------------------------
-if has('vim_starting')  
-  set runtimepath+=~/.config/nvim/bundle/neobundle.vim/
-  set runtimepath+=~/.config/nvim/
+set nocompatible
+
+" Dein Scripts-----------------------------
+if has('vim_starting')
+  set runtimepath+=~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim/
 endif
 
-let neobundle_readme=expand('~/.config/nvim/bundle/neobundle.vim/README.md')
+let dein_readme=expand('~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim/README.md')
 
-if !filereadable(neobundle_readme)  
-  echo "Installing NeoBundle..."
+if !filereadable(dein_readme)
+  echo "Installing Dein..."
   echo ""
   silent !mkdir -p ~/.config/nvim/bundle
-  silent !git clone https://github.com/Shougo/neobundle.vim ~/.config/nvim/bundle/neobundle.vim/
-  let g:not_finsh_neobundle = "yes"
+  silent !git clone https://github.com/Shougo/dein.vim ~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim/
+  silent !cd ~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim/
+  silent !sh ./installer.sh ~/.config/nvim/bundle
+  let dein_readme='none'
 endif
 
-call neobundle#begin(expand('$HOME/.config/nvim/bundle'))  
-NeoBundleFetch 'Shougo/neobundle.vim'
+call dein#begin('~/.config/nvim/bundle')
 
-" ------------------------------------
-" THIS IS WHERE YOUR PLUGINS WILL COME
-" ------------------------------------
-NeoBundle 'Valloric/YouCompleteMe', {  
-     \ 'build'      : {
-        \ 'mac'     : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-        \ 'unix'    : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-        \ 'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-        \ 'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
-        \ }
-     \ }
-NeoBundle 'bling/vim-airline'
-NeoBundle 'morhetz/gruvbox'
+call dein#add('~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim')
+call dein#add('Shougo/deoplete.nvim', {'build': 'vim -s +UpdateRemotePlugin'})
+call dein#add('bling/vim-airline')
+call dein#add('morhetz/gruvbox')
+call dein#add('flazz/vim-colorschemes')
+call dein#add('lifepillar/vim-solarized8')
+call dein#add('othree/html5.vim')
+call dein#add('hail2u/vim-css3-syntax')
+call dein#add('klen/python-mode')
+call dein#add('pangloss/vim-javascript')
+call dein#add('fatih/vim-go')
+call dein#add('zchee/deoplete-go')
+call dein#add('tomtom/tcomment_vim')
 
-call neobundle#end()  
+call dein#end()
+call dein#save_state()
+
+if !filereadable(dein_readme)
+	silent call dein#install()
+	let dein_readme=expand('~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim/README.md')
+endif
+
 filetype plugin indent on
+syntax enable
 
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck  
-"End NeoBundle Scripts-------------------------
+" End Dein Scripts-------------------------
+
+" After adding a plugin, run :call dein#install()
 
 inoremap jj <Esc>`^
 set backspace=indent,eol,start " backspace over everything in insert mode
@@ -47,4 +56,7 @@ noremap l k
 noremap ; l
 colorscheme gruvbox
 set background=dark
+let g:deoplete#enable_at_startup = 1
 
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
