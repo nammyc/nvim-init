@@ -5,22 +5,22 @@ if has('vim_starting')
   set runtimepath+=~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim/
 endif
 
-let dein_readme=expand('~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim/README.md')
-
-if !filereadable(dein_readme)
+" Dein installation------------------------
+if !filereadable(expand('~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim/README.md'))
   echo "Installing Dein..."
   echo ""
   silent !mkdir -p ~/.config/nvim/bundle
   silent !git clone https://github.com/Shougo/dein.vim ~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim/
   silent !cd ~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim/
   silent !sh ./installer.sh ~/.config/nvim/bundle
-  let dein_readme='none'
+  echo "Dein install completed."
 endif
+" End Dein installation--------------------
 
 call dein#begin('~/.config/nvim/bundle')
 
 call dein#add('~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim')
-call dein#add('Shougo/deoplete.nvim', {'build': 'vim -s +UpdateRemotePlugin'})
+call dein#add('Shougo/deoplete.nvim', {'build': 'vim -s +"silent call dein#remote_plugins()"'})
 call dein#add('scrooloose/nerdtree')
 call dein#add('Xuyuanp/nerdtree-git-plugin')
 call dein#add('sheerun/vim-polyglot')
@@ -40,11 +40,9 @@ call dein#add('octol/vim-cpp-enhanced-highlight')
 call dein#add('jistr/vim-nerdtree-tabs')
 
 call dein#end()
-call dein#save_state()
 
-if !filereadable(dein_readme)
-	silent call dein#install()
-	let dein_readme=expand('~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim/README.md')
+if (silent call dein#check_install()) 
+	silent call dein#update()
 endif
 
 filetype plugin indent on
