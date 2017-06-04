@@ -41,9 +41,9 @@ call dein#add('jistr/vim-nerdtree-tabs')
 
 call dein#end()
 
-let check = echom dein#check_install()
+let check = call dein#check_install()
 if check
-	call dein#update()
+  call dein#update()
 endif
 
 filetype plugin indent on
