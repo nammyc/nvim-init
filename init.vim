@@ -29,6 +29,7 @@ NeoBundle 'Valloric/YouCompleteMe', {
         \ }
      \ }
 NeoBundle 'bling/vim-airline'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 
 call neobundle#end()  
 filetype plugin indent on
