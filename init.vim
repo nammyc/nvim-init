@@ -41,7 +41,8 @@ call dein#add('jistr/vim-nerdtree-tabs')
 
 call dein#end()
 
-if (echom dein#check_install()) 
+let check = echom dein#check_install()
+if check
 	call dein#update()
 endif
 
