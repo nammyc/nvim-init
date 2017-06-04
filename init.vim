@@ -28,6 +28,8 @@ NeoBundle 'Valloric/YouCompleteMe', {
         \ 'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
         \ }
      \ }
+NeoBundle 'bling/vim-airline'
+
 call neobundle#end()  
 filetype plugin indent on
 
