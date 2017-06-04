@@ -21,6 +21,9 @@ call dein#begin('~/.config/nvim/bundle')
 
 call dein#add('~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim')
 call dein#add('Shougo/deoplete.nvim', {'build': 'vim -s +UpdateRemotePlugin'})
+call dein#add('scrooloose/nerdtree')
+call dein#add('Xuyuanp/nerdtree-git-plugin')
+call dein#add('sheerun/vim-polyglot')
 call dein#add('bling/vim-airline')
 call dein#add('morhetz/gruvbox')
 call dein#add('flazz/vim-colorschemes')
@@ -54,9 +57,16 @@ noremap j h
 noremap k j
 noremap l k
 noremap ; l
+map <C-n> :NERDTreeToggle<CR>
 colorscheme gruvbox
 set background=dark
 let g:deoplete#enable_at_startup = 1
 
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+autocmd vimenter * NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
