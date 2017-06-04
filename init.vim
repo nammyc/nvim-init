@@ -35,6 +35,9 @@ call dein#add('pangloss/vim-javascript')
 call dein#add('fatih/vim-go')
 call dein#add('zchee/deoplete-go')
 call dein#add('tomtom/tcomment_vim')
+call dein#add('ap/vim-css-color')
+call dein#add('octol/vim-cpp-enhanced-highlight')
+call dein#add('jistr/vim-nerdtree-tabs')
 
 call dein#end()
 call dein#save_state()
@@ -65,8 +68,5 @@ let g:deoplete#enable_at_startup = 1
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-autocmd vimenter * NERDTree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:nerdtree_tabs_open_on_console_startup = 1
 
