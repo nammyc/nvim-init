@@ -19,7 +19,6 @@ endif
 
 if dein#load_state('~/.config/nvim/bundle')
     call dein#begin('~/.config/nvim/bundle')
-
     call dein#add('~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim')
     call dein#add('Shougo/deoplete.nvim')
     call dein#add('rip-rip/clang_complete')
