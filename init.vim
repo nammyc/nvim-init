@@ -17,19 +17,26 @@ if !filereadable(expand('~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim/
 endif
 " End Dein installation--------------------
 
-call dein#begin('~/.config/nvim/bundle')
+if dein#load_state('~/.config/nvim/bundle')
+    call dein#begin('~/.config/nvim/bundle')
 
-call dein#add('~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim')
-call dein#add('Shougo/deoplete.nvim', {'build': 'vim -s +"call dein#remote_plugins()"'})
-call dein#add('sheerun/vim-polyglot')
-call dein#add('morhetz/gruvbox')
-call dein#add('flazz/vim-colorschemes')
-call dein#add('lifepillar/vim-solarized8')
-call dein#add('fatih/vim-go')
-call dein#add('zchee/deoplete-go')
-call dein#add('tomtom/tcomment_vim')
-
-call dein#end()
+    call dein#add('~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim')
+    call dein#add('Shougo/deoplete.nvim')
+    call dein#add('rip-rip/clang_complete')
+    call dein#add('artur-shaik/vim-javacomplete2')
+    call dein#add('airblade/vim-rooter')
+    call dein#add('sheerun/vim-polyglot')
+    call dein#add('morhetz/gruvbox')
+    call dein#add('jiangmiao/auto-pairs')
+    call dein#add('flazz/vim-colorschemes')
+    call dein#add('tomtom/tcomment_vim')
+    call dein#add('scrooloose/nerdtree')
+    call dein#add('Xuyuanp/nerdtree-git-plugin')
+    call dein#add('vim-airline/vim-airline')
+    call dein#add('vim-airline/vim-airline-themes')
+    
+    call dein#end()
+endif
 
 if dein#check_install()
   call dein#update()
@@ -43,7 +50,6 @@ syntax enable
 " After adding a plugin, run :call dein#install()
 
 inoremap jj <Esc>`^
-set backspace=indent,eol,start " backspace over everything in insert mode
 noremap j h
 noremap k j
 noremap l k
@@ -52,11 +58,54 @@ noremap ; l
 :command Wq wq
 :command W w
 :command Q q
+nnoremap <C-J> <C-W><C-H>
+nnoremap <C-K> <C-W><C-J>
+nnoremap <C-L> <C-W><C-K>
+nnoremap <C-;> <C-w><C-L>
+
+" Custom settings
+set scrolloff=2
+set number
+set showmode
+set showcmd
+set ruler
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set hlsearch
+set incsearch
+set nobackup
+set splitbelow
+set splitright
+set backspace=indent,eol,start " backspace over everything in insert mode
+set laststatus=2 " Enable status line
+
+" Colorscheme settings
 colorscheme gruvbox
 set background=dark
-let g:deoplete#enable_at_startup = 1
-set laststatus=2
 
-" deoplete tab-complete
+" deoplete settings
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
+" clang_complete settings
+let g:clang_library_path='/usr/lib/llvm-4.0/lib/libclang-4.0.so.1' " This must change to reflect proper clang lib
+let g:clang_user_options = '-std=c++17'
+let g:clang_complete_auto = 1
+
+" javacomplete2 settings
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+let g:JavaComplete_ClosingBrace = 0
+
+" NERDTree settings
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | e    xe 'NERDTree' argv()[0] | wincmd p | ene | endif
+map <C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree    ()) | q | endif
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+let NERDTreeShowHidden=1
+let NERDTreeQuitOnOpen=1
+let NERDTreeMinimalUI=1
+let NERDTreeDirArrows=1
