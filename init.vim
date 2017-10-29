@@ -25,7 +25,7 @@ if dein#load_state('~/.config/nvim/bundle')
     call dein#add('rip-rip/clang_complete')
     call dein#add('artur-shaik/vim-javacomplete2')
     call dein#add('airblade/vim-rooter')
-    call dein#add('sheerun/vim-polyglot')
+    " call dein#add('sheerun/vim-polyglot')
     call dein#add('morhetz/gruvbox')
     call dein#add('jiangmiao/auto-pairs')
     call dein#add('flazz/vim-colorschemes')
@@ -34,6 +34,7 @@ if dein#load_state('~/.config/nvim/bundle')
     call dein#add('Xuyuanp/nerdtree-git-plugin')
     call dein#add('vim-airline/vim-airline')
     call dein#add('vim-airline/vim-airline-themes')
+    call dein#add('w0rp/ale')
     
     call dein#end()
 endif
@@ -97,6 +98,9 @@ let g:clang_complete_auto = 1
 " javacomplete2 settings
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 let g:JavaComplete_ClosingBrace = 0
+
+" ALE settings
+let g:ale_sign_column_always = 1
 
 " NERDTree settings
 autocmd StdinReadPre * let s:std_in=1
